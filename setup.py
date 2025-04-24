@@ -16,11 +16,11 @@ setup(
     name="comfyui-nodes",
     version="0.1.0",
     author="Eric Hiss",
-    author_email="your.email@example.com",  # Replace with your email
+    author_email="eric@rollei.us",  
     description="A collection of custom nodes for ComfyUI",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/EricRollei/comfyui-nodes",
+    url="https://github.com/EricRollei/Comfy-Metadata-System",
     packages=find_packages(),
     include_package_data=True,
     classifiers=[
