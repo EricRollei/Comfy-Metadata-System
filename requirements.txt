@@ -1,0 +1,29 @@
+albumentations
+clip
+colorthief
+cv2
+deepface
+matplotlib
+numpy>=1.20.0
+oidnpy
+open_clip
+PIL
+psd_tools 
+pyiqa
+pytesseract
+requests
+scipy>=1.7.0
+segmentation_models_pytorch
+skimage
+sklearn
+torch>=1.10.0
+torchvision
+tqdm
+transformers>=4.25.0
+ultralytics
+
+# Requirements for Eric's Metadata System and AI Image Detection Nodes
+
+# Core dependencies
+Pillow>=9.0.0
+opencv-python>=4.5.0
