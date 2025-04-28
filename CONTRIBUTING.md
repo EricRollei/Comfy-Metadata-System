@@ -1,103 +1,199 @@
-# Contributing to ComfyUI Custom Nodes
+# Contributing to Metadata System for ComfyUI
 
-First of all, thank you for considering contributing to this project! This document provides guidelines and instructions for contributing.
+Thank you for your interest in contributing to the Metadata System for ComfyUI! This document provides guidelines and instructions for contributing to the project.
+
+## Table of Contents
+
+- [Code of Conduct](#code-of-conduct)
+- [Getting Started](#getting-started)
+- [How to Contribute](#how-to-contribute)
+  - [Reporting Bugs](#reporting-bugs)
+  - [Suggesting Enhancements](#suggesting-enhancements)
+  - [Code Contributions](#code-contributions)
+- [Development Setup](#development-setup)
+- [Pull Request Process](#pull-request-process)
+- [Coding Standards](#coding-standards)
+- [Documentation](#documentation)
+- [Testing](#testing)
+- [Licensing](#licensing)
 
 ## Code of Conduct
 
-By participating in this project, you agree to maintain a respectful and inclusive environment for everyone.
+This project adheres to a Code of Conduct that establishes how the community interacts. By participating, you are expected to uphold this code. Please report unacceptable behavior to [eric@historic.camera](mailto:eric@historic.camera).
 
-## How Can I Contribute?
+## Getting Started
+
+1. Fork the repository
+2. Clone your fork to your local machine
+3. Set up the development environment (see [Development Setup](#development-setup))
+4. Create a branch for your changes
+5. Make your changes
+6. Submit a pull request
+
+## How to Contribute
 
 ### Reporting Bugs
 
-* Check if the bug has already been reported in the [Issues](https://github.com/EricRollei/comfyui-nodes/issues)
-* If not, create a new issue with a descriptive title
-* Include steps to reproduce, expected behavior, actual behavior, and environment details
-* Include screenshots if applicable
+If you find a bug, please create an issue using the bug report template. Include as much detail as possible:
 
-### Suggesting Features
+- A clear and descriptive title
+- Steps to reproduce the issue
+- Expected behavior
+- Actual behavior
+- Screenshots (if applicable)
+- Environment details (OS, Python version, ComfyUI version, etc.)
 
-* Check if the feature has already been requested in the [Issues](https://github.com/EricRollei/comfyui-nodes/issues)
-* If not, create a new issue with a descriptive title prefixed with [Feature Request]
-* Clearly describe the feature and why it would be valuable
-* Include examples of how the feature might work
+### Suggesting Enhancements
+
+Have an idea for an enhancement? Create an issue using the feature request template. Include:
+
+- A clear and descriptive title
+- A detailed description of the proposed enhancement
+- The motivation behind the enhancement
+- Possible implementation details (if known)
 
 ### Code Contributions
 
-#### Setting Up Your Development Environment
+Code contributions are welcome through pull requests. Please follow these steps:
 
-1. Fork the repository
-2. Clone your fork locally:
-   ```bash
-   git clone https://github.com/your-username/comfyui-nodes.git
-   cd comfyui-nodes
-   ```
-3. Install dependencies:
-   ```bash
-   pip install -r requirements.txt
-   ```
-4. Install development dependencies:
-   ```bash
-   pip install -r requirements-dev.txt  # if available
-   ```
+1. Check existing issues and pull requests to avoid duplicating work
+2. Create a new branch for your changes
+3. Follow the [Coding Standards](#coding-standards)
+4. Add tests for your changes
+5. Update documentation as needed
+6. Submit a pull request
 
-#### Development Workflow
+## Development Setup
 
-1. Create a new branch for your feature or bugfix:
+1. Clone the repository and navigate to the project directory:
    ```bash
-   git checkout -b feature/your-feature-name
-   # or
-   git checkout -b fix/your-bugfix-name
+   git clone https://github.com/YourUsername/Metadata_system.git
+   cd Metadata_system
    ```
 
-2. Make your changes following the coding standards
-
-3. Test your changes thoroughly
-   * Ensure existing functionality is not broken
-   * Test with various inputs and edge cases
-   * Verify the node works as expected within ComfyUI
-
-4. Commit your changes:
+2. Create a virtual environment and activate it:
    ```bash
-   git commit -m "Description of your changes"
+   python -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
 
-5. Push your branch to your fork:
+3. Install development dependencies:
    ```bash
-   git push origin feature/your-feature-name
+   pip install -e ".[dev]"
    ```
 
-6. Create a Pull Request from your fork to the original repository
+4. Install optional dependencies for full functionality:
+   ```bash
+   # Install PyExiv2 (if possible)
+   pip install pyexiv2
+   
+   # Install ExifTool (platform-specific)
+   # See INSTALLATION.md for details
+   ```
 
-#### Coding Standards
-
-* Use consistent formatting with the rest of the codebase
-* Include appropriate docstrings and comments
-* Follow PEP 8 guidelines for Python code
-* Each new node should include:
-  * Proper type annotations
-  * Clear documentation of inputs and outputs
-  * Error handling for invalid inputs
-
-#### Adding a New Node
-
-1. Create a new Python file in the appropriate directory
-2. Use the license header template at the top of the file
-3. Implement the node following ComfyUI's node architecture
-4. Document the node in the README.md
-5. If appropriate, add examples demonstrating the node's use
+5. Run tests to verify your setup:
+   ```bash
+   pytest
+   ```
 
 ## Pull Request Process
 
-1. Update the README.md with details of your changes if applicable
-2. Add your new node to the node catalog if applicable
-3. Update any examples or documentation to reflect your changes
-4. The maintainer will review your PR and may request changes
-5. Once approved, your PR will be merged
+1. Update your branch with the latest changes from the main repository
+2. Ensure your code passes all tests
+3. Update documentation for any changed functionality
+4. Submit your pull request with a clear description of the changes
+5. Address any feedback from the code review
 
-## License Considerations
+Pull requests will be merged once they have been reviewed and approved by a project maintainer.
 
-* By contributing to this project, you agree that your contributions will be licensed under the project's dual license
-* Ensure any libraries or code you include is compatible with the existing licenses
+## Coding Standards
 
-Thank you for your contributions!
+Please follow these coding standards:
+
+- Use [PEP 8](https://www.python.org/dev/peps/pep-0008/) style guidelines
+- Include comprehensive docstrings for all classes and methods
+- Use type hints for function parameters and return values
+- Write clear, descriptive comments explaining complex logic
+- Use meaningful variable and function names
+- Keep functions short and focused on a single responsibility
+- Handle errors gracefully with appropriate exception handling
+
+Example:
+
+```python
+def process_metadata(self, filepath: str, metadata: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    Process metadata and return enhanced version.
+    
+    Args:
+        filepath: Path to the original file
+        metadata: Original metadata to process
+        
+    Returns:
+        Enhanced metadata with additional information
+        
+    Raises:
+        FileNotFoundError: If filepath does not exist
+    """
+    if not os.path.exists(filepath):
+        raise FileNotFoundError(f"File not found: {filepath}")
+        
+    # Process metadata
+    result = metadata.copy()
+    
+    # Add processing logic here
+    
+    return result
+```
+
+## Documentation
+
+Good documentation is essential. When contributing, please:
+
+- Update docstrings for any changed/added functions or classes
+- Update README.md for any user-facing changes
+- Update API_REFERENCE.md for any API changes
+- Create/update examples to demonstrate new features
+
+## Testing
+
+Write tests for all new features and bug fixes. Tests should be:
+
+- Located in the `tests/` directory
+- Named with a `test_` prefix (e.g., `test_embedded_handler.py`)
+- Written using pytest
+- Thorough enough to cover edge cases
+
+Example:
+
+```python
+def test_read_metadata_nonexistent_file():
+    """Test reading metadata from a nonexistent file."""
+    handler = EmbeddedMetadataHandler(debug=True)
+    result = handler.read_metadata("nonexistent_file.jpg")
+    assert result == {}
+
+def test_write_metadata_valid():
+    """Test writing metadata to a valid file."""
+    handler = EmbeddedMetadataHandler(debug=True)
+    
+    # Create a test image
+    from PIL import Image
+    test_img = Image.new('RGB', (100, 100), color='red')
+    test_file = "test_write.jpg"
+    test_img.save(test_file)
+    
+    metadata = {'basic': {'title': 'Test Image'}}
+    result = handler.write_metadata(test_file, metadata)
+    
+    assert result is True
+    
+    # Cleanup
+    os.remove(test_file)
+```
+
+## Licensing
+
+By contributing to this project, you agree that your contributions will be licensed under the project's dual license. Please review the LICENSE file in the repository for details.
+
+Thank you for contributing to the Metadata System for ComfyUI!
